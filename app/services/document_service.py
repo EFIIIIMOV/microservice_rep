@@ -24,12 +24,12 @@ class DocumentService():
     def get_document(self) -> list[Document]:
         return self.document_repo.get_document()
 
-    def create_document(self, doc_id: int, ord_id: int, type: str, create_date: datetime, completion_date: datetime,
+    def create_document(self, doc_id: UUID, ord_id: UUID, type: str, create_date: datetime, completion_date: datetime,
                         doc: str) -> Document:
         document = Document(doc_id=doc_id, ord_id=ord_id, type=type, create_date=create_date,
                             completion_date=completion_date, doc=doc)
 
         return self.document_repo.create_document(document)
 
-    def delete_document(self, doc_id: int) -> None:
+    def delete_document(self, doc_id: UUID) -> None:
         return self.document_repo.delete_doc(doc_id)

@@ -8,9 +8,9 @@ class Document(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     # doc_id: UUID
-    doc_id: int
+    doc_id: UUID
     # ord_id: UUID
-    ord_id: int
+    ord_id: UUID
     type: str
     create_date: datetime
     completion_date: datetime
@@ -19,9 +19,9 @@ class Document(BaseModel):
 
 class CreateDocumentRequest(BaseModel):
     # doc_id: UUID
-    doc_id: int
+    doc_id: UUID
     # ord_id: UUID
-    ord_id: int
+    ord_id: UUID
     type: str
     create_date: datetime
     completion_date: datetime

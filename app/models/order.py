@@ -19,7 +19,7 @@ class Order(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
     # ord_id: UUID
-    ord_id: int
+    ord_id: UUID
     status: OrderStatus
     address_info: str
     customer_info: str
@@ -30,7 +30,7 @@ class Order(BaseModel):
 
 class CreateOrderRequest(BaseModel):
     # ord_id: UUID
-    ord_id: int
+    ord_id: UUID
     address_info: str
     customer_info: str
     create_date: datetime

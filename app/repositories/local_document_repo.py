@@ -5,11 +5,11 @@ from app.models.document import Document
 from typing import Optional
 
 documents: list[Document] = [
-    Document(doc_id=0, ord_id=0, type='test_doc_type_0', create_date=datetime.datetime.now(),
-             completion_date=datetime.datetime.now(), doc='test_doc_doc_0'),
-    Document(doc_id=1, ord_id=1, type='test_doc_type_1', create_date=datetime.datetime.now(),
+    Document(doc_id=UUID('31babbb3-5541-4a2a-8201-537cdff25fed'), ord_id=UUID('31babbb3-5541-4a2a-8201-537cdff25fed'),
+             type='test_doc_type_1', create_date=datetime.datetime.now(),
              completion_date=datetime.datetime.now(), doc='test_doc_doc_1'),
-    Document(doc_id=2, ord_id=2, type='test_doc_type_2', create_date=datetime.datetime.now(),
+    Document(doc_id=UUID('45309954-8e3c-4635-8066-b342f634252c'), ord_id=UUID('45309954-8e3c-4635-8066-b342f634252c'),
+             type='test_doc_type_2', create_date=datetime.datetime.now(),
              completion_date=datetime.datetime.now(), doc='test_doc_doc_2'),
 ]
 
@@ -29,7 +29,7 @@ class DocumentRepo():
     #
     #     raise KeyError
 
-    def get_document_by_id(self, id: int) -> Document:
+    def get_document_by_id(self, id: UUID) -> Document:
         for d in documents:
             if d.doc_id == id:
                 return d
@@ -43,7 +43,7 @@ class DocumentRepo():
         documents.append(doc)
         return doc
 
-    def delete_doc(self, id: int) -> Optional[Document]:
+    def delete_doc(self, id: UUID) -> Optional[Document]:
         for i, document in enumerate(documents):
             if document.doc_id == id:
                 deleted_document = documents.pop(i)

@@ -27,7 +27,7 @@ def add_order(
 
 
 @document_router.post('/{id}/delete')
-def delete_order(id: int, document_service: DocumentService = Depends(DocumentService)) -> Document:
+def delete_order(id: UUID, document_service: DocumentService = Depends(DocumentService)) -> Document:
     try:
         document = document_service.delete_document(id)
         return document.dict()

@@ -1,3 +1,5 @@
+# uvicorn app.main:app --reload
+
 import asyncio
 from fastapi import FastAPI
 from app import rabbitmq

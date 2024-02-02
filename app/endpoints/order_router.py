@@ -29,7 +29,7 @@ def add_order(
 
 
 @order_router.post('/{id}/accepted')
-def accepted_order(id: int, order_service: OrderService = Depends(OrderService)) -> Order:
+def accepted_order(id: UUID, order_service: OrderService = Depends(OrderService)) -> Order:
     try:
         order = order_service.accepted_order(id)
         return order.dict()
@@ -40,7 +40,7 @@ def accepted_order(id: int, order_service: OrderService = Depends(OrderService))
 
 
 @order_router.post('/{id}/pick_up')
-def pick_up_order(id: int, order_service: OrderService = Depends(OrderService)) -> Order:
+def pick_up_order(id: UUID, order_service: OrderService = Depends(OrderService)) -> Order:
     try:
         order = order_service.pick_up_order(id)
         return order.dict()
@@ -51,7 +51,7 @@ def pick_up_order(id: int, order_service: OrderService = Depends(OrderService)) 
 
 
 @order_router.post('/{id}/delivering')
-def delivering_order(id: int, order_service: OrderService = Depends(OrderService)) -> Order:
+def delivering_order(id: UUID, order_service: OrderService = Depends(OrderService)) -> Order:
     try:
         order = order_service.delivering_order(id)
         return order.dict()
@@ -62,7 +62,7 @@ def delivering_order(id: int, order_service: OrderService = Depends(OrderService
 
 
 @order_router.post('/{id}/delivered')
-def delivered_order(id: int, order_service: OrderService = Depends(OrderService)) -> Order:
+def delivered_order(id: UUID, order_service: OrderService = Depends(OrderService)) -> Order:
     try:
         order = order_service.delivered_order(id)
         return order.dict()
@@ -73,7 +73,7 @@ def delivered_order(id: int, order_service: OrderService = Depends(OrderService)
 
 
 @order_router.post('/{id}/paid')
-def paid_order(id: int, order_service: OrderService = Depends(OrderService)) -> Order:
+def paid_order(id: UUID, order_service: OrderService = Depends(OrderService)) -> Order:
     try:
         order = order_service.paid_order(id)
         return order.dict()
@@ -84,7 +84,7 @@ def paid_order(id: int, order_service: OrderService = Depends(OrderService)) -> 
 
 
 @order_router.post('/{id}/done')
-def done_order(id: int, order_service: OrderService = Depends(OrderService)) -> Order:
+def done_order(id: UUID, order_service: OrderService = Depends(OrderService)) -> Order:
     try:
         order = order_service.done_order(id)
         return order.dict()
@@ -95,7 +95,7 @@ def done_order(id: int, order_service: OrderService = Depends(OrderService)) -> 
 
 
 @order_router.post('/{id}/cancel')
-def cancel_delivery(id: int, order_service: OrderService = Depends(OrderService)) -> Order:
+def cancel_delivery(id: UUID, order_service: OrderService = Depends(OrderService)) -> Order:
     try:
         order = order_service.cancel_order(id)
         return order.dict()
@@ -106,7 +106,7 @@ def cancel_delivery(id: int, order_service: OrderService = Depends(OrderService)
 
 
 @order_router.post('/{id}/delete')
-def delete_order(id: int, order_service: OrderService = Depends(OrderService)) -> Order:
+def delete_order(id: UUID, order_service: OrderService = Depends(OrderService)) -> Order:
     try:
         order = order_service.delete_order(id)
         return order.dict()

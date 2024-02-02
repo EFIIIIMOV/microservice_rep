@@ -5,11 +5,11 @@ from app.models.order import Order, OrderStatus
 from typing import Optional
 
 orders: list[Order] = [
-    Order(ord_id=0, status=OrderStatus.CREATE, address_info='test_address_info_0', customer_info='test_customer_info_0',
+    Order(ord_id=UUID('85db966c-67f1-411e-95c0-f02edfa5464a'), status=OrderStatus.CREATE, address_info='test_address_info_0', customer_info='test_customer_info_0',
           create_date=datetime.datetime.now(), completion_date=datetime.datetime.now(), order_info='test_order_info_0'),
-    Order(ord_id=1, status=OrderStatus.CREATE, address_info='test_address_info_1', customer_info='test_customer_info_1',
+    Order(ord_id=UUID('31babbb3-5541-4a2a-8201-537cdff25fed'), status=OrderStatus.CREATE, address_info='test_address_info_1', customer_info='test_customer_info_1',
           create_date=datetime.datetime.now(), completion_date=datetime.datetime.now(), order_info='test_order_info_1'),
-    Order(ord_id=2, status=OrderStatus.CREATE, address_info='test_address_info_2', customer_info='test_customer_info_2',
+    Order(ord_id=UUID('45309954-8e3c-4635-8066-b342f634252c'), status=OrderStatus.CREATE, address_info='test_address_info_2', customer_info='test_customer_info_2',
           create_date=datetime.datetime.now(), completion_date=datetime.datetime.now(), order_info='test_order_info_2'),
 ]
 
@@ -29,7 +29,7 @@ class OrderRepo():
     #
     #     raise KeyError
 
-    def get_order_by_id(self, id: int) -> Order:
+    def get_order_by_id(self, id: UUID) -> Order:
         for d in orders:
             if d.ord_id == id:
                 return d
@@ -51,7 +51,7 @@ class OrderRepo():
 
         return order
 
-    def delete_order(self, id: int) -> Optional[Order]:
+    def delete_order(self, id: UUID) -> Optional[Order]:
         for i, order in enumerate(orders):
             if order.ord_id == id:
                 deleted_order = orders.pop(i)

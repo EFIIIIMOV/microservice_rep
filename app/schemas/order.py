@@ -8,7 +8,7 @@ class Order(Base):
     __tablename__ = 'order'
 
     # ord_id: Column(UUID(as_uuid=True))
-    ord_id = Column(Integer, primary_key=True, index=True)
+    ord_id = Column(UUID(as_uuid=True), primary_key=True)
     status = Column(Enum(OrderStatus), nullable=False)
     address_info = Column(String, nullable=False)
     customer_info = Column(String, nullable=False)

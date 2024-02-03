@@ -8,9 +8,7 @@ from typing import Optional
 class Document(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
-    # doc_id: UUID
     doc_id: UUID
-    # ord_id: UUID
     ord_id: UUID
     type: str
     customer_info: str

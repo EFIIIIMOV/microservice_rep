@@ -6,7 +6,7 @@ from datetime import datetime
 
 from app.models.document import Document
 from app.repositories.db_document_repo import DocumentRepo
-from app.repositories.local_document_repo import DocumentRepo
+#from app.repositories.local_document_repo import DocumentRepo
 
 
 # from app.repositories.local_deliveryman_repo import DeliverymenRepo

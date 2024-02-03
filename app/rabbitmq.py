@@ -10,35 +10,8 @@ from uuid import UUID
 
 from app.settings import settings
 from app.services.document_service import DocumentService
-from app.repositories.local_document_repo import DocumentRepo
+from app.repositories.db_document_repo import DocumentRepo
 
-
-#
-# async def send_to_document_queue(data: dict):
-#     try:
-#         # Установка соединения с RabbitMQ
-#         connection = await aio_pika.connect_robust(settings.amqp_url)
-#
-#         async with connection:
-#             # Создание канала
-#             channel = await connection.channel()
-#
-#             # Объявление очереди, если её нет
-#             queue = await channel.declare_queue('document_created_queue', durable=True)
-#
-#             # Отправка данных в очередь
-#             await channel.default_exchange.publish(
-#                 aio_pika.Message(body=json.dumps(data).encode()),
-#                 routing_key='document_created_queue'
-#             )
-#             print(" [x] Sent %r" % data)
-#
-#     except aio_pika.exceptions.AMQPError as e:
-#         print(f"Error occurred while sending data to queue: {e}")
-#
-#     finally:
-#         # Закрытие соединения после отправки данных в очередь
-#         await connection.close()
 
 async def send_to_document_queue(data: dict):
     try:
@@ -51,11 +24,6 @@ async def send_to_document_queue(data: dict):
 
             # Объявление очереди, если её нет
             queue = await channel.declare_queue('document_created_queue', durable=True)
-
-            # Преобразование UUID в строку перед сериализацией в JSON
-            # for key, value in data.items():
-            #     if isinstance(value, UUID):
-            #         data[key] = str(value)
 
             for key, value in data.items():
                 if isinstance(value, UUID):
@@ -81,6 +49,7 @@ async def send_to_document_queue(data: dict):
 async def process_created_document(msg: IncomingMessage):
     try:
         data = json.loads(msg.body.decode())
+        print("\n/// process_created_document ///\n ")
         DocumentService(DocumentRepo()).create_document(
             data['ord_id'], data['type'], data['doc'], data['customer_info'])
         await msg.ack()
@@ -90,19 +59,12 @@ async def process_created_document(msg: IncomingMessage):
 
 
 async def consume(loop: AbstractEventLoop) -> AbstractRobustConnection:
-    # connection = await connect_robust(settings.amqp_url, loop=loop)
-    # channel = await connection.channel()
-
     connection = await aio_pika.connect_robust(settings.amqp_url, loop=loop)
     channel = await connection.channel()
 
     document_created_queue = await channel.declare_queue('document_created_queue', durable=True)
-    # order_paid_queue = await channel.declare_queue('laptev_order_paid_queue', durable=True)
-
-    # print('\n////document_created_queue = await channel.declare_queue////\n')
 
     await document_created_queue.consume(process_created_document)
-    # await order_paid_queue.consume(process_paid_order)
 
     print('Started RabbitMQ consuming...')
 

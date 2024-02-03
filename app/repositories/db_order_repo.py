@@ -2,35 +2,24 @@ import traceback
 from uuid import UUID
 from sqlalchemy.orm import Session
 
-from app.database import get_db
+from app.database import get_db_ord
 from app.models.order import Order
 from app.schemas.order import Order as DBOrder
-
-
-# from app.repositories.local_deliveryman_repo import DeliverymenRepo
 
 
 class OrderRepo():
     db: Session
 
-    # deliveryman_repo: DeliverymenRepo
-
     def __init__(self) -> None:
-        self.db = next(get_db())
-        # self.deliveryman_repo = DeliverymenRepo()
+        self.db = next(get_db_ord())
 
     def _map_to_model(self, order: DBOrder) -> Order:
         result = Order.from_orm(order)
-        # if order.deliveryman_id != None:
-        #     result.deliveryman = self.deliveryman_repo.get_deliveryman_by_id(
-        #         order.deliveryman_id)
 
         return result
 
     def _map_to_schema(self, order: Order) -> DBOrder:
         data = dict(order)
-        # del data['deliveryman']
-        # data['deliveryman_id'] = order.deliveryman.id if order.deliveryman != None else None
         result = DBOrder(**data)
 
         return result
@@ -39,22 +28,13 @@ class OrderRepo():
         orders = []
         for d in self.db.query(DBOrder).all():
             orders.append(self._map_to_model(d))
+
         return orders
 
-    # def get_order_by_id(self, id: UUID) -> Order:
-    #     order = self.db \
-    #         .query(DBOrder) \
-    #         .filter(DBOrder.id == id) \
-    #         .first()
-    #
-    #     if order == None:
-    #         raise KeyError
-    #     return self._map_to_model(order)
-
-    def get_order_by_id(self, id: int) -> Order:
+    def get_order_by_id(self, id: UUID) -> Order:
         order = self.db \
             .query(DBOrder) \
-            .filter(DBOrder.id == id) \
+            .filter(DBOrder.ord_id == id) \
             .first()
 
         if order == None:
@@ -73,23 +53,8 @@ class OrderRepo():
 
     def set_status(self, order: Order) -> Order:
         db_order = self.db.query(DBOrder).filter(
-            DBOrder.id == order.id).first()
+            DBOrder.ord_id == order.ord_id).first()
         db_order.status = order.status
+        db_order.completion_date = order.completion_date
         self.db.commit()
         return self._map_to_model(db_order)
-
-    # def delete_order(self, order_id: UUID) -> None:
-    #     order = self.db.query(DBOrder).filter(DBOrder.id == order_id).first()
-    #     if order:
-    #         self.db.delete(order)
-    #         self.db.commit()
-    #     else:
-    #         raise KeyError("Order not found")
-
-    def delete_order(self, order_id: int) -> None:
-        order = self.db.query(DBOrder).filter(DBOrder.id == order_id).first()
-        if order:
-            self.db.delete(order)
-            self.db.commit()
-        else:
-            raise KeyError("Order not found")

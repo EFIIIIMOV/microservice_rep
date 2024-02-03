@@ -8,7 +8,7 @@ import asyncio
 from app.models.order import Order, OrderStatus
 from app.rabbitmq import send_to_document_queue
 from app.repositories.db_order_repo import OrderRepo
-from app.repositories.local_order_repo import OrderRepo
+# from app.repositories.local_order_repo import OrderRepo
 
 from app.services.document_service import DocumentService
 
@@ -27,12 +27,6 @@ class OrderService():
 
     def get_order(self) -> list[Order]:
         return self.order_repo.get_order()
-
-    # def create_order(self, ord_id: UUID, address_info: str, customer_info: str, create_date: datetime,
-    #                  completion_date: datetime, order_info: str) -> Order:
-    #     order = Order(ord_id=ord_id, status=OrderStatus.CREATE, address_info=address_info, customer_info=customer_info,
-    #                   create_date=create_date.now(), completion_date=None, order_info=order_info)
-    #     return self.order_repo.create_order(order)
 
     def create_order(self, address_info: str, customer_info: str, order_info: str) -> Order:
         order = Order(ord_id=uuid4(), status=OrderStatus.CREATE, address_info=address_info, customer_info=customer_info,
@@ -97,6 +91,7 @@ class OrderService():
             raise ValueError
 
         order.status = OrderStatus.DONE
+        order.completion_date = datetime.now()
         return self.order_repo.set_status(order)
 
     def cancel_order(self, id: UUID) -> Order:
@@ -107,9 +102,9 @@ class OrderService():
         order.status = OrderStatus.CANCELLED
         return self.order_repo.set_status(order)
 
-    def delete_order(self, id: UUID) -> None:
-        order = self.order_repo.get_order_by_id(id)
-        if not order:
-            raise ValueError(f'Order with id={id} not found')
-
-        return self.order_repo.delete_order(id)
+    # def delete_order(self, id: UUID) -> None:
+    #     order = self.order_repo.get_order_by_id(id)
+    #     if not order:
+    #         raise ValueError(f'Order with id={id} not found')
+    #
+    #     return self.order_repo.delete_order(id)

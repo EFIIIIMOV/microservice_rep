@@ -1,6 +1,6 @@
 # 1. Поменять int на UUID в функциях
 
-from uuid import UUID
+from uuid import UUID, uuid4
 from fastapi import Depends
 from datetime import datetime
 
@@ -24,10 +24,9 @@ class DocumentService():
     def get_document(self) -> list[Document]:
         return self.document_repo.get_document()
 
-    def create_document(self, doc_id: UUID, ord_id: UUID, type: str, create_date: datetime, completion_date: datetime,
-                        doc: str) -> Document:
-        document = Document(doc_id=doc_id, ord_id=ord_id, type=type, create_date=create_date,
-                            completion_date=completion_date, doc=doc)
+    def create_document(self, ord_id: UUID, type: str, doc: str, customer_info: str) -> Document:
+        document = Document(doc_id=uuid4(), ord_id=ord_id, type=type, create_date=datetime.now(),
+                            doc=doc, customer_info=customer_info)
 
         return self.document_repo.create_document(document)
 

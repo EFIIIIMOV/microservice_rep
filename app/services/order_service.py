@@ -1,6 +1,6 @@
 # 1. Поменять int на UUID в функциях
 
-from uuid import UUID
+from uuid import UUID, uuid4
 from fastapi import Depends
 from datetime import datetime
 import asyncio
@@ -28,10 +28,15 @@ class OrderService():
     def get_order(self) -> list[Order]:
         return self.order_repo.get_order()
 
-    def create_order(self, ord_id: UUID, address_info: str, customer_info: str, create_date: datetime,
-                     completion_date: datetime, order_info: str) -> Order:
-        order = Order(ord_id=ord_id, status=OrderStatus.CREATE, address_info=address_info, customer_info=customer_info,
-                      create_date=create_date, completion_date=completion_date, order_info=order_info)
+    # def create_order(self, ord_id: UUID, address_info: str, customer_info: str, create_date: datetime,
+    #                  completion_date: datetime, order_info: str) -> Order:
+    #     order = Order(ord_id=ord_id, status=OrderStatus.CREATE, address_info=address_info, customer_info=customer_info,
+    #                   create_date=create_date.now(), completion_date=None, order_info=order_info)
+    #     return self.order_repo.create_order(order)
+
+    def create_order(self, address_info: str, customer_info: str, order_info: str) -> Order:
+        order = Order(ord_id=uuid4(), status=OrderStatus.CREATE, address_info=address_info, customer_info=customer_info,
+                      create_date=datetime.now(), completion_date=None, order_info=order_info)
         return self.order_repo.create_order(order)
 
     def accepted_order(self, id: UUID) -> Order:
@@ -42,12 +47,12 @@ class OrderService():
         order.status = OrderStatus.ACCEPTED
 
         document_data = {
-            "doc_id": id,
+            "doc_id": uuid4(),
             "ord_id": id,
             "type": "Test Type",
-            "create_date": "2024-01-28T12:00:00",
-            "completion_date": "2024-01-28T13:00:00",
-            "doc": "Test Document"
+            "create_date": datetime.now(),
+            "doc": "Test Document",
+            "customer_info": order.customer_info
         }
 
         asyncio.run(send_to_document_queue(document_data))

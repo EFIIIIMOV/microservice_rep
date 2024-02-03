@@ -2,6 +2,7 @@ import enum
 from uuid import UUID
 from datetime import datetime
 from pydantic import ConfigDict, BaseModel
+from typing import Optional
 
 
 class Document(BaseModel):
@@ -12,17 +13,13 @@ class Document(BaseModel):
     # ord_id: UUID
     ord_id: UUID
     type: str
+    customer_info: str
     create_date: datetime
-    completion_date: datetime
     doc: str
 
 
 class CreateDocumentRequest(BaseModel):
-    # doc_id: UUID
-    doc_id: UUID
-    # ord_id: UUID
     ord_id: UUID
     type: str
-    create_date: datetime
-    completion_date: datetime
     doc: str
+    customer_info: str

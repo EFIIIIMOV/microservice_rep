@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import aio_pika
 import json
 import traceback
@@ -9,6 +11,7 @@ from uuid import UUID
 from app.settings import settings
 from app.services.document_service import DocumentService
 from app.repositories.local_document_repo import DocumentRepo
+
 
 #
 # async def send_to_document_queue(data: dict):
@@ -50,9 +53,15 @@ async def send_to_document_queue(data: dict):
             queue = await channel.declare_queue('document_created_queue', durable=True)
 
             # Преобразование UUID в строку перед сериализацией в JSON
+            # for key, value in data.items():
+            #     if isinstance(value, UUID):
+            #         data[key] = str(value)
+
             for key, value in data.items():
                 if isinstance(value, UUID):
                     data[key] = str(value)
+                elif isinstance(value, datetime):
+                    data[key] = value.isoformat()
 
             # Отправка данных в очередь
             await channel.default_exchange.publish(
@@ -68,11 +77,12 @@ async def send_to_document_queue(data: dict):
         # Закрытие соединения после отправки данных в очередь
         await connection.close()
 
+
 async def process_created_document(msg: IncomingMessage):
     try:
         data = json.loads(msg.body.decode())
         DocumentService(DocumentRepo()).create_document(
-            data['doc_id'], data['ord_id'], data['type'], data['create_date'], data['completion_date'], data['doc'])
+            data['ord_id'], data['type'], data['doc'], data['customer_info'])
         await msg.ack()
     except:
         traceback.print_exc()

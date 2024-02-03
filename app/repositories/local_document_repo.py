@@ -6,11 +6,11 @@ from typing import Optional
 
 documents: list[Document] = [
     Document(doc_id=UUID('31babbb3-5541-4a2a-8201-537cdff25fed'), ord_id=UUID('31babbb3-5541-4a2a-8201-537cdff25fed'),
-             type='test_doc_type_1', create_date=datetime.datetime.now(),
-             completion_date=datetime.datetime.now(), doc='test_doc_doc_1'),
+             type='test_doc_type_1', create_date=datetime.datetime.now(), doc='test_doc_doc_1',
+             customer_info='test_customer_info_0'),
     Document(doc_id=UUID('45309954-8e3c-4635-8066-b342f634252c'), ord_id=UUID('45309954-8e3c-4635-8066-b342f634252c'),
-             type='test_doc_type_2', create_date=datetime.datetime.now(),
-             completion_date=datetime.datetime.now(), doc='test_doc_doc_2'),
+             type='test_doc_type_2', create_date=datetime.datetime.now(), doc='test_doc_doc_2',
+             customer_info='test_customer_info_1'),
 ]
 
 

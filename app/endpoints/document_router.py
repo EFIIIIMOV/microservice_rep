@@ -18,9 +18,8 @@ def add_order(
         order_service: DocumentService = Depends(DocumentService)
 ) -> Document:
     try:
-        document = order_service.create_document(document_info.doc_id, document_info.ord_id, document_info.type,
-                                                 document_info.create_date, document_info.completion_date,
-                                                 document_info.doc)
+        document = order_service.create_document(document_info.ord_id, document_info.type, document_info.doc,
+                                                 document_info.customer_info)
         return document.dict()
     except KeyError:
         raise HTTPException(400, f'Order with id={document_info.doc_id} already exists')

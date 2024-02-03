@@ -2,6 +2,7 @@ import enum
 from uuid import UUID
 from datetime import datetime
 from pydantic import ConfigDict, BaseModel
+from typing import Optional
 
 
 class OrderStatus(enum.Enum):
@@ -24,15 +25,11 @@ class Order(BaseModel):
     address_info: str
     customer_info: str
     create_date: datetime
-    completion_date: datetime
+    completion_date: Optional[datetime] = None
     order_info: str
 
 
 class CreateOrderRequest(BaseModel):
-    # ord_id: UUID
-    ord_id: UUID
     address_info: str
     customer_info: str
-    create_date: datetime
-    completion_date: datetime
     order_info: str

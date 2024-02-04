@@ -5,12 +5,12 @@ from fastapi import Depends
 from datetime import datetime
 import asyncio
 
-from app.models.order import Order, OrderStatus
-from app.rabbitmq import send_to_document_queue
-from app.repositories.db_order_repo import OrderRepo
+from app_order.app.models.order import Order, OrderStatus
+from app_order.app.rabbitmq import send_to_document_queue
+from app_order.app.repositories.db_order_repo import OrderRepo
 # from app.repositories.local_order_repo import OrderRepo
 
-from app.services.document_service import DocumentService
+from app_document.app.services.document_service import DocumentService
 
 
 class OrderService():

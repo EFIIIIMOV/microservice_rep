@@ -2,9 +2,9 @@ import traceback
 from uuid import UUID
 from sqlalchemy.orm import Session
 
-from app.database import get_db_ord
-from app.models.order import Order
-from app.schemas.order import Order as DBOrder
+from app_order.app.database import get_db_ord
+from app_order.app.models.order import Order
+from app_order.app.schemas.order import Order as DBOrder
 
 
 class OrderRepo():

@@ -1,6 +1,6 @@
-from sqlalchemy import Column, String, DateTime, Integer
+from sqlalchemy import Column, String, DateTime
 from sqlalchemy.dialects.postgresql import UUID
-from app.schemas.base_schema import Base
+from app_order.app.schemas.base_schema import Base
 
 
 class Document(Base):

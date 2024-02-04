@@ -5,12 +5,12 @@ import json
 import traceback
 from asyncio import AbstractEventLoop
 from aio_pika.abc import AbstractRobustConnection
-from aio_pika import connect_robust, IncomingMessage
+from aio_pika import IncomingMessage
 from uuid import UUID
 
-from app.settings import settings
-from app.services.document_service import DocumentService
-from app.repositories.db_document_repo import DocumentRepo
+from app_order.app.settings import settings
+from app_document.app.services.document_service import DocumentService
+from app_document.app.repositories.db_document_repo import DocumentRepo
 
 
 async def send_to_document_queue(data: dict):

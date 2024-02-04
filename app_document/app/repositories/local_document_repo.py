@@ -1,7 +1,7 @@
 import datetime
 from uuid import UUID
 
-from app.models.document import Document
+from app_document.app.models.document import Document
 from typing import Optional
 
 documents: list[Document] = [

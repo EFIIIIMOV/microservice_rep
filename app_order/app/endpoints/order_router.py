@@ -1,8 +1,8 @@
 from uuid import UUID
 from fastapi import APIRouter, Depends, HTTPException
 
-from app_order.app.services.order_service import OrderService
-from app_order.app.models.order import Order, CreateOrderRequest
+from app.services.order_service import OrderService
+from app.models.order import Order, CreateOrderRequest
 
 order_router = APIRouter(prefix='/order', tags=['Order'])
 

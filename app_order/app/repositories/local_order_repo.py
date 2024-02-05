@@ -1,7 +1,7 @@
 import datetime
 from uuid import UUID
 
-from app_order.app.models.order import Order, OrderStatus
+from app.models.order import Order, OrderStatus
 from typing import Optional
 
 orders: list[Order] = [

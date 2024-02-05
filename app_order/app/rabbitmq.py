@@ -8,9 +8,9 @@ from aio_pika.abc import AbstractRobustConnection
 from aio_pika import IncomingMessage
 from uuid import UUID
 
-from app_order.app.settings import settings
-from app_document.app.services.document_service import DocumentService
-from app_document.app.repositories.db_document_repo import DocumentRepo
+from app.settings import settings
+#from app_document.app.services.document_service import DocumentService
+#from app_document.app.repositories.db_document_repo import DocumentRepo
 
 
 async def send_to_document_queue(data: dict):
@@ -46,16 +46,16 @@ async def send_to_document_queue(data: dict):
         await connection.close()
 
 
-async def process_created_document(msg: IncomingMessage):
-    try:
-        data = json.loads(msg.body.decode())
-        print("\n/// process_created_document ///\n ")
-        DocumentService(DocumentRepo()).create_document(
-            data['ord_id'], data['type'], data['doc'], data['customer_info'])
-        await msg.ack()
-    except:
-        traceback.print_exc()
-        await msg.ack()
+# async def process_created_document(msg: IncomingMessage):
+#     try:
+#         data = json.loads(msg.body.decode())
+#         print("\n/// process_created_document ///\n ")
+#         DocumentService(DocumentRepo()).create_document(
+#             data['ord_id'], data['type'], data['doc'], data['customer_info'])
+#         await msg.ack()
+#     except:
+#         traceback.print_exc()
+#         await msg.ack()
 
 
 async def consume(loop: AbstractEventLoop) -> AbstractRobustConnection:
@@ -64,7 +64,7 @@ async def consume(loop: AbstractEventLoop) -> AbstractRobustConnection:
 
     document_created_queue = await channel.declare_queue('document_created_queue', durable=True)
 
-    await document_created_queue.consume(process_created_document)
+    #await document_created_queue.consume(process_created_document)
 
     print('Started RabbitMQ consuming...')
 

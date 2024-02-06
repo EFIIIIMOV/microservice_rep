@@ -26,3 +26,27 @@ jobs:
       - name: Build and push app_order service image
         run: |
           docker push efiiiimov/app_order:latest
+
+      #///////////////////////////////////////////////////////////////
+
+    build-and-push-to-yc:
+      name: Build and push to YandexCloud Registry
+      #needs: [ test-app-printing ]
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+
+        - name: Build docker image
+          run: |
+            docker build ./app_document -f ./app_document/Dockerfile --tag cr.yandex/${{ secrets.YC_REGISTRY_ID }}/delivery_service/app_document:latest
+
+        - name: Login to YC Registry
+          uses: docker/login-action@v3.0.0
+          with:
+            registry: cr.yandex
+            username: json_key
+            password: ${{ secrets.YC_KEYS }}
+
+        - name: Push tag YC Registry
+          run: |
+            docker push cr.yandex/${{ secrets.YC_REGISTRY_ID }}/delivery_service/app_document:latest

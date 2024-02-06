@@ -3,11 +3,13 @@ from sqlalchemy.orm import sessionmaker
 
 from app.settings import settings
 
-#from app.settings import settings
+# from app.settings import settings
 
-#engine_ord = create_engine(settings.postgres_url_ord, echo=True)
+# from app.settings import settings
+
+# engine_ord = create_engine(settings.postgres_url_ord, echo=True)
 engine_doc = create_engine(settings.postgres_url_doc, echo=True)
-#SessionLocalOrd = sessionmaker(autocommit=False, autoflush=False, bind=engine_ord)
+# SessionLocalOrd = sessionmaker(autocommit=False, autoflush=False, bind=engine_ord)
 SessionLocalDoc = sessionmaker(autocommit=False, autoflush=False, bind=engine_doc)
 
 

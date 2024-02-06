@@ -1,9 +1,9 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from app.settings import settings
-
 #from app.settings import settings
+
+from app.settings import settings
 
 #engine_ord = create_engine(settings.postgres_url_ord, echo=True)
 engine_doc = create_engine(settings.postgres_url_doc, echo=True)

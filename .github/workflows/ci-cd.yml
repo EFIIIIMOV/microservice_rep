@@ -38,7 +38,7 @@ jobs:
 
         - name: Build docker image
           run: |
-            docker build ./app_document -f ./app_document/Dockerfile --tag cr.yandex/${{ secrets.YC_REGISTRY_ID }}/delivery_service/app_document:latest
+            docker build ./app_document -f ./app_document/Dockerfile --tag cr.yandex/${{ secrets.YC_REGISTRY_ID }}/EFIMOV/delivery_service/app_document:latest
 
         - name: Login to YC Registry
           uses: docker/login-action@v3.0.0
@@ -49,4 +49,4 @@ jobs:
 
         - name: Push tag YC Registry
           run: |
-            docker push cr.yandex/${{ secrets.YC_REGISTRY_ID }}/delivery_service/app_document:latest
+            docker push cr.yandex/${{ secrets.YC_REGISTRY_ID }}/EFIMOV/delivery_service/app_document:latest

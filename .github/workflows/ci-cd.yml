@@ -31,7 +31,7 @@ name: CI/CD pipline
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 jobs:
   build-and-push-to-dh:

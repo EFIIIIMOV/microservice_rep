@@ -1,3 +1,32 @@
+#name: CI/CD pipline
+#
+#on:
+#  push:
+#    branches: [ "master" ]
+#
+#jobs:
+#  build-and-push-to-dh:
+#    name: Build and push to DockerHub
+#    #needs: [ test-app-order ]
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v3
+#
+#      - name: Build docker app_delivery image
+#        run: |
+#          docker build ./app_order -f ./app_order/Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/app_order:latest
+#
+#      - name: Login to DockerHub
+#        uses: docker/login-action@v3.0.0
+#        with:
+#          username: ${{ secrets.DOCKER_USERNAME }}
+#          password: ${{ secrets.DOCKER_PASSWORD }}
+#
+#
+#      - name: Build and push app_order service image
+#        run: |
+#          docker push ${{ secrets.DOCKER_USERNAME }}/app_order:latest
+
 name: CI/CD pipline
 
 on:
@@ -14,15 +43,15 @@ jobs:
 
       - name: Build docker app_delivery image
         run: |
-          docker build ./app_order -f ./app_order/Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/app_order:latest
+          docker build ./app_order -f ./app_order/Dockerfile --tag efiiiimov/app_order:latest
 
       - name: Login to DockerHub
         uses: docker/login-action@v3.0.0
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          username: efiiiimov
+          password: I?7pWbUSY6
 
 
       - name: Build and push app_order service image
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/app_order:latest
+          docker push efiiiimov/app_order:latest

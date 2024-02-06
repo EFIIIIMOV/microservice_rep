@@ -43,7 +43,7 @@ jobs:
 
       - name: Build docker app_delivery image
         run: |
-          docker build ./app_order -f ./app_order/Dockerfile --tag app_order:latest
+          docker build ./app_order -f ./app_order/Dockerfile --tag efiiiimov/app_order:latest
 
       - name: Login to DockerHub
         uses: docker/login-action@v3.0.0

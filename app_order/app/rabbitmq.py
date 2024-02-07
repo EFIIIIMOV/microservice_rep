@@ -8,7 +8,7 @@ from aio_pika.abc import AbstractRobustConnection
 from aio_pika import IncomingMessage
 from uuid import UUID
 
-from app.settings import settings
+from app_order.app.settings import settings
 #from app_document.app.services.document_service import DocumentService
 #from app_document.app.repositories.db_document_repo import DocumentRepo
 

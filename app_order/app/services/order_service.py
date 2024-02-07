@@ -4,32 +4,18 @@ from uuid import UUID, uuid4
 from fastapi import Depends
 from datetime import datetime
 import asyncio
-
-from app.models.order import Order, OrderStatus
-from app.rabbitmq import send_to_document_queue
-from app.repositories.db_order_repo import OrderRepo
-
-
-# from app.repositories.local_order_repo import OrderRepo
-
-# from app.services.document_service import DocumentService
+from app_order.app.models.order import Order, OrderStatus
+from app_order.app.repositories.db_order_repo import OrderRepo
 
 
 class OrderService():
     order_repo: OrderRepo
 
-    # document_service: DocumentService
-
-    # deliveryman_repo: DeliverymenRepo
-
-    # def __init__(self, order_repo: OrderRepo = Depends(OrderRepo),
-    #              document_service: DocumentService = Depends(DocumentService)) -> None:
-    def __init__(self, order_repo: OrderRepo = Depends(OrderRepo), ) -> None:
+    def __init__(self, order_repo: OrderRepo = Depends(OrderRepo)) -> None:
         self.order_repo = order_repo
-        # self.document_service = document_service
-        # self.deliveryman_repo = DeliverymenRepo()
 
     def get_order(self) -> list[Order]:
+        print(f"\n////{self.order_repo}////\n")
         return self.order_repo.get_order()
 
     def create_order(self, address_info: str, customer_info: str, order_info: str) -> Order:
@@ -38,6 +24,7 @@ class OrderService():
         return self.order_repo.create_order(order)
 
     def accepted_order(self, id: UUID) -> Order:
+        from app_order.app.rabbitmq import send_to_document_queue
         order = self.order_repo.get_order_by_id(id)
         if order.status != OrderStatus.CREATE:
             raise ValueError

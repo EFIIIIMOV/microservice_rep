@@ -2,9 +2,9 @@ name: CI/CD pipline
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
-jobs:
+#jobs:
 #  #  build-and-push-to-dh:
 #  #    name: Build and push to DockerHub
 #  #    #needs: [ test-app-order ]

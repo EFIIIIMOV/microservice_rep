@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from app import rabbitmq
 from app.endpoints.order_router import order_router
 #from app.endpoints.document_router import document_router
+#from app.endpoints.document_router import document_router
 
 app = FastAPI(title='Service')
 

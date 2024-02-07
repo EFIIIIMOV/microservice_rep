@@ -30,8 +30,8 @@ class Settings(BaseSettings):
     amqp_url: str = os.getenv("AMQP_URL")
     print(f"\n\n AMQP_URL: {amqp_url}\n\n")
 
-    postgres_url: str = os.getenv("POSTGRES_URL_DOC")
-    print(f"\n\n POSTGRES_URL_DOC: {postgres_url}\n\n")
+    postgres_url_ord: str = os.getenv("POSTGRES_URL_ORD")
+    print(f"\n\n POSTGRES_URL_ORD: {postgres_url_ord}\n\n")
 
 
 settings = Settings()

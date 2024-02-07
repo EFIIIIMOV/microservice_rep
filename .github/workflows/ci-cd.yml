@@ -1,5 +1,7 @@
 name: CI/CD pipline
 
+#################не забыть включить workflow на github############
+
 #on:
 #  push:
 #    branches: [ "main" ]

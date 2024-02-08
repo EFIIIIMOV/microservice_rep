@@ -85,6 +85,6 @@ def test_set_status(first_order: Order, order_repo: OrderRepo) -> None:
     assert order_repo.set_status(first_order).status == first_order.status
 
 
-def test_delete_created_order(order_repo: OrderRepo) -> None:
-    order_repo.de()
-    assert order_repo.get_order() == []
+def test_delete_created_order(first_order: Order, second_order: Order, order_repo: OrderRepo) -> None:
+    assert order_repo.delete_order_by_id(first_order.ord_id) == first_order
+    assert order_repo.delete_order_by_id(second_order.ord_id) == second_order

@@ -68,3 +68,23 @@ class OrderRepo():
             print(f"An error occurred while deleting all orders: {e}")
             self.db.rollback()
             raise
+
+    def delete_order_by_id(self, id: UUID) -> Order:
+        try:
+            # Find the order by its ord_id
+            order = self.db.query(DBOrder).filter(DBOrder.ord_id == id).one()
+
+            # If the order is found, map it to the model and commit the deletion
+            if order:
+                deleted_order = self._map_to_model(order)
+                self.db.delete(order)
+                self.db.commit()
+                return deleted_order
+            else:
+                # Handle the case where no order is found
+                raise ValueError(f"No order found with ord_id {id}")
+        except Exception as e:
+            # Rollback any changes if there's an error
+            self.db.rollback()
+            # Re-raise the exception so it can be handled elsewhere
+            raise e

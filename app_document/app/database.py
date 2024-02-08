@@ -3,8 +3,6 @@ from sqlalchemy.orm import sessionmaker
 
 from app_document.app.settings import settings
 
-
-
 # from app.settings import settings
 
 # engine_ord = create_engine(settings.postgres_url_ord, echo=True)

@@ -4,8 +4,8 @@ import pytest
 from uuid import uuid4, UUID
 from datetime import datetime
 
-from app.models.document import Document
-from app.repositories.local_document_repo import DocumentRepo
+from app_document.app.models.document import Document
+from app_document.app.repositories.local_document_repo import DocumentRepo
 
 document_test_repo = DocumentRepo()
 

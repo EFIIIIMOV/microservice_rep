@@ -71,7 +71,7 @@ jobs:
 
   build-and-push-to-yc:
     name: Build and push to YandexCloud Registry
-    needs: [ test-app-printing ]
+    needs: [ test-app-document ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

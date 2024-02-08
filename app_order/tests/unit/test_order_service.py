@@ -79,78 +79,29 @@ def test_done_order_not_found(
         order_service.done_order(uuid4())
 
 
-def test_done_order_status_error(
-        second_order_data: tuple[str, str, str],
-        order_service: OrderService
-) -> None:
-    with pytest.raises(ValueError):
-        orders = order_service.get_order()
-        order_service.done_order(orders[1].ord_id)
-
-
 def test_accepted_order_not_found(
         order_service: OrderService
 ) -> None:
     with pytest.raises(KeyError):
         order_service.accepted_order(uuid4())
 
-#
-# def test_activate_delivery(
-#         first_delivery_data: tuple[UUID, str, datetime],
-#         delivery_service: DeliveryService
-# ) -> None:
-#     delivery = delivery_service.activate_delivery(first_delivery_data[0])
-#     assert delivery.status == DeliveryStatuses.ACTIVATED
-#     assert delivery.id == first_delivery_data[0]
-#
-#
-# def test_set_deliveryman(
-#         first_delivery_data: tuple[UUID, str, datetime],
-#         delivery_service: DeliveryService,
-#         deliveryman_repo: DeliverymenRepo
-# ) -> None:
-#     deliveryman = deliveryman_repo.get_deliverymen()[0]
-#     delivery = delivery_service.set_deliveryman(
-#         first_delivery_data[0], deliveryman.id)
-#     assert delivery.status == DeliveryStatuses.ACTIVATED
-#     assert delivery.id == first_delivery_data[0]
-#     assert delivery.deliveryman.id == deliveryman.id
-#     assert delivery.deliveryman.name == deliveryman.name
-#
-#
-# def test_change_deliveryman(
-#         first_delivery_data: tuple[UUID, str, datetime],
-#         delivery_service: DeliveryService,
-#         deliveryman_repo: DeliverymenRepo
-# ) -> None:
-#     deliveryman = deliveryman_repo.get_deliverymen()[1]
-#     delivery = delivery_service.set_deliveryman(
-#         first_delivery_data[0], deliveryman.id)
-#     assert delivery.status == DeliveryStatuses.ACTIVATED
-#     assert delivery.id == first_delivery_data[0]
-#     assert delivery.deliveryman.id == deliveryman.id
-#     assert delivery.deliveryman.name == deliveryman.name
-#
-#
-# def test_finish_delivery(
-#         first_delivery_data: tuple[UUID, str, datetime],
-#         delivery_service: DeliveryService
-# ) -> None:
-#     delivery = delivery_service.finish_delivery(first_delivery_data[0])
-#     assert delivery.status == DeliveryStatuses.DONE
-#     assert delivery.id == first_delivery_data[0]
-#
-#
-# def test_cancel_delivery_status_error(
-#         first_delivery_data: tuple[UUID, str, datetime],
-#         delivery_service: DeliveryService
-# ) -> None:
-#     with pytest.raises(ValueError):
-#         delivery_service.cancel_delivery(first_delivery_data[0])
-#
-#
-# def test_cancel_delivery_not_found(
-#         delivery_service: DeliveryService
-# ) -> None:
-#     with pytest.raises(KeyError):
-#         delivery_service.cancel_delivery(uuid4())
+
+def test_accepted_delivery(
+        first_order_data: tuple[str, str, str],
+        order_service: OrderService
+) -> None:
+    order = order_service.get_order()[0]
+    order_service.accepted_order(order.ord_id)
+    assert order.status == OrderStatus.ACCEPTED
+    assert order.ord_id == order_service.get_order()[0].ord_id
+
+
+def test_done_delivery(
+        first_order_data: tuple[str, str, str],
+        order_service: OrderService
+) -> None:
+    order = order_service.get_order()[0]
+    order.status = OrderStatus.PAID
+    order_service.done_order(order.ord_id)
+    assert order.status == OrderStatus.DONE
+    assert order.ord_id == order_service.get_order()[0].ord_id

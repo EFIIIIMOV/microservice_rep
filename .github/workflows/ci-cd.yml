@@ -22,17 +22,17 @@ jobs:
         run: |
           python -m pytest ./app_order/tests/unit
 
-      - name: Prepare integration tests
-        run: |
-          sudo docker run --name pg-tests -e POSTGRES_PASSWORD=password -p 5432:5432 -d postgres:latest
-          rm ./.env
-          echo "AMQP_URL=$AMQP_URL
-          POSTGRES_URL=$POSTGRES_URL
-          " > ./.env
-          sleep 5
-        env:
-          AMQP_URL: amqp://guest:guest@rabbitmq:5672/
-          POSTGRES_URL: postgresql://postgres:password@localhost:5432/test_db_order
+#      - name: Prepare integration tests
+#        run: |
+#          sudo docker run --name pg-tests -e POSTGRES_PASSWORD=password -p 5432:5432 -d postgres:latest
+#          rm ./.env
+#          echo "AMQP_URL=$AMQP_URL
+#          POSTGRES_URL=$POSTGRES_URL
+#          " > ./.env
+#          sleep 5
+#        env:
+#          AMQP_URL: amqp://guest:guest@rabbitmq:5672/
+#          POSTGRES_URL: postgresql://postgres:password@localhost:5432/test_db_order
 
       - name: Run integration tests
         run: |

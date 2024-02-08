@@ -58,3 +58,13 @@ class OrderRepo():
         db_order.completion_date = order.completion_date
         self.db.commit()
         return self._map_to_model(db_order)
+
+    def delete_all_orders(self) -> None:
+        try:
+            # Delete all orders from the database
+            self.db.query(DBOrder).delete()
+            self.db.commit()
+        except Exception as e:
+            print(f"An error occurred while deleting all orders: {e}")
+            self.db.rollback()
+            raise

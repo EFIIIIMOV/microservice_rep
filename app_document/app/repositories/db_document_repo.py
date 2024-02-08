@@ -2,9 +2,9 @@ import traceback
 from uuid import UUID
 from sqlalchemy.orm import Session
 
-from app.database import get_db_doc
-from app.models.document import Document
-from app.schemas.document import Document as DBDocument
+from app_document.app.database import get_db_doc
+from app_document.app.models.document import Document
+from app_document.app.schemas.document import Document as DBDocument
 
 
 class DocumentRepo():
@@ -50,3 +50,13 @@ class DocumentRepo():
         except:
             traceback.print_exc()
             raise KeyError
+
+    def delete_all_document(self) -> None:
+        try:
+            # Delete all orders from the database
+            self.db.query(DBDocument).delete()
+            self.db.commit()
+        except Exception as e:
+            print(f"An error occurred while deleting all document: {e}")
+            self.db.rollback()
+            raise

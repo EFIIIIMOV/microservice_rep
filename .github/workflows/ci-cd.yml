@@ -20,7 +20,7 @@ jobs:
 
       - name: Run unit tests
         run: |
-          pytest ./app_order/tests/unit
+          python -m pytest ./app_order/tests/unit
 
       - name: Prepare integration tests
         run: |
@@ -36,7 +36,7 @@ jobs:
 
       - name: Run integration tests
         run: |
-          pytest ./app_order/tests/integration
+          python -m pytest ./app_order/tests/integration
 
   build-and-push-to-dh:
     name: Build and push to DockerHub

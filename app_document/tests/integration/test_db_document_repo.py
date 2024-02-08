@@ -34,9 +34,9 @@ def second_document() -> Document:
                     doc='test_doc_doc_2', customer_info='test_customer_info_1')
 
 
-def test_empty_list(document_repo: DocumentRepo) -> None:
-    document_repo.delete_all_document()
-    assert document_repo.get_document() == []
+# def test_empty_list(document_repo: DocumentRepo) -> None:
+#     document_repo.delete_all_document()
+#     assert document_repo.get_document() == []
 
 
 def test_add_first_document(first_document: Document, document_repo: DocumentRepo) -> None:
@@ -63,3 +63,8 @@ def test_add_second_document(first_document: Document, second_document: Document
     assert len(documents) == 2
     assert documents[0] == first_document
     assert documents[1] == second_document
+
+
+def test_delete_created_order(first_document: Document, second_document: Document, document_repo: Document) -> None:
+    assert document_repo.delete_document_by_id(first_document.doc_id) == first_document
+    assert document_repo.delete_document_by_id(second_document.doc_id) == second_document

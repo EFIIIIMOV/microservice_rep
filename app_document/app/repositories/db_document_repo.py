@@ -60,3 +60,23 @@ class DocumentRepo():
             print(f"An error occurred while deleting all document: {e}")
             self.db.rollback()
             raise
+
+    def delete_document_by_id(self, id: UUID) -> Document:
+        try:
+            # Find the order by its ord_id
+            document = self.db.query(DBDocument).filter(DBDocument.doc_id == id).one()
+
+            # If the order is found, map it to the model and commit the deletion
+            if document:
+                deleted_document = self._map_to_model(document)
+                self.db.delete(document)
+                self.db.commit()
+                return deleted_document
+            else:
+                # Handle the case where no order is found
+                raise ValueError(f"No order found with ord_id {id}")
+        except Exception as e:
+            # Rollback any changes if there's an error
+            self.db.rollback()
+            # Re-raise the exception so it can be handled elsewhere
+            raise e

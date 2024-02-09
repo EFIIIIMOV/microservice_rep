@@ -3,9 +3,9 @@ from uuid import UUID
 
 from sqlalchemy.orm import Session
 
-from app_document.app.database import get_db_doc
-from app_document.app.models.document import Document
-from app_document.app.schemas.document import Document as DBDocument
+from app.database import get_db_doc
+from app.models.document import Document
+from app.schemas.document import Document as DBDocument
 
 
 class DocumentRepo():

@@ -24,7 +24,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 
 # from app_document.app.schemas.document import Document
-from app_document.app.schemas.base_schema import Base
+from app.schemas.base_schema import Base
 
 target_metadata = Base.metadata
 
@@ -34,7 +34,7 @@ target_metadata = Base.metadata
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
-from app_document.app.settings import settings
+from app.settings import settings
 
 
 def run_migrations_offline() -> None:

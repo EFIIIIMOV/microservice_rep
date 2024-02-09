@@ -4,9 +4,9 @@ import asyncio
 
 from fastapi import FastAPI
 
-from app_document.app import rabbitmq
+from app import rabbitmq
 # from app.endpoints.order_router import order_router
-from app_document.app.endpoints.document_router import document_router
+from app.endpoints.document_router import document_router
 
 app = FastAPI(title='Service')
 

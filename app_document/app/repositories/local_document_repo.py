@@ -1,7 +1,7 @@
 from typing import Optional
 from uuid import UUID
 
-from app_document.app.models.document import Document
+from app.models.document import Document
 
 # documents: list[Document] = [
 #     Document(doc_id=UUID('31babbb3-5541-4a2a-8201-537cdff25fed'), ord_id=UUID('31babbb3-5541-4a2a-8201-537cdff25fed'),

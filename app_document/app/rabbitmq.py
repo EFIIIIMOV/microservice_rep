@@ -6,9 +6,9 @@ import aio_pika
 from aio_pika import IncomingMessage
 from aio_pika.abc import AbstractRobustConnection
 
-from app_document.app.repositories.db_document_repo import DocumentRepo
-from app_document.app.services.document_service import DocumentService
-from app_document.app.settings import settings
+from app.repositories.db_document_repo import DocumentRepo
+from app.services.document_service import DocumentService
+from app.settings import settings
 
 
 # async def send_to_document_queue(data: dict):

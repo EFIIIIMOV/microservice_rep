@@ -2,8 +2,8 @@ from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException
 
-from app_document.app.models.document import Document, CreateDocumentRequest
-from app_document.app.services.document_service import DocumentService
+from app.models.document import Document, CreateDocumentRequest
+from app.services.document_service import DocumentService
 
 document_router = APIRouter(prefix='/document', tags=['Document'])
 

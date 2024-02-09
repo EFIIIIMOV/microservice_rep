@@ -41,14 +41,14 @@ jobs:
 
       - name: Run unit tests
         run: |
-          cd /app_document
           python -m pytest ./tests/unit
+        working-directory: ./app_document
           
 
       - name: Run integration tests
         run: |
-          cd /app_document
           python -m pytest ./tests/integration
+        working-directory: ./app_document
 
 #  build-and-push-to-dh:
   #    name: Build and push to DockerHub

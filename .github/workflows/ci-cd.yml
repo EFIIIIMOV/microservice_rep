@@ -37,16 +37,16 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y python3-pip
-          pip install -r ./app_document/requirements.txt
+          pip install -r ./requirements.txt
 
       - name: Run unit tests
         run: |
-          pytest ./app_document/app/tests/unit
+          pytest ./app/tests/unit
           
 
       - name: Run integration tests
         run: |
-          pytest ./app_document/app/tests/integration
+          pytest ./app/tests/integration
 
 #  build-and-push-to-dh:
   #    name: Build and push to DockerHub

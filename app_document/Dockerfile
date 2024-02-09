@@ -18,7 +18,7 @@ COPY ./alembic.ini /app_document/alembic.ini
 EXPOSE 8080
 
 # Добавляем путь к корневому каталогу проекта в PYTHONPATH
-ENV PYTHONPATH="${PYTHONPATH}:/microservice/app_document"
-ENV PYTHONPATH="${PYTHONPATH}:/microservice/app_document/app"
+ENV PYTHONPATH="${PYTHONPATH}:/app_document"
+ENV PYTHONPATH="${PYTHONPATH}:/app_document/app"
 
 CMD ["/bin/sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8080"]

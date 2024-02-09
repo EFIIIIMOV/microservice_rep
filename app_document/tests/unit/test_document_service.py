@@ -2,8 +2,8 @@ from uuid import uuid4, UUID
 
 import pytest
 
-from app.repositories.local_document_repo import DocumentRepo
-from app.services.document_service import DocumentService
+from app_document.app.repositories.local_document_repo import DocumentRepo
+from app_document.app.services.document_service import DocumentService
 
 
 @pytest.fixture(scope='session')

@@ -5,8 +5,8 @@ from uuid import UUID, uuid4
 
 import pytest
 
-from app.models.document import Document
-from app.repositories.db_document_repo import DocumentRepo
+from app_document.app.models.document import Document
+from app_document.app.repositories.db_document_repo import DocumentRepo
 
 
 @pytest.fixture()

@@ -37,16 +37,16 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y python3-pip
-          sudo pip install -r ./requirements.txt
+          pip install -r ./app_document/requirements.txt
 
       - name: Run unit tests
         run: |
-          pytest ./app/tests/unit
+          pytest ./tests/unit
           
 
       - name: Run integration tests
         run: |
-          pytest ./app/tests/integration
+          pytest ./tests/integration
 
 #  build-and-push-to-dh:
   #    name: Build and push to DockerHub
@@ -70,42 +70,42 @@ jobs:
   #        run: |
   #          docker push efiiiimov/app_order:latest
 
-  build-and-push-to-yc:
-    name: Build and push to YandexCloud Registry
-    #needs: [ test-app-document ]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+  # build-and-push-to-yc:
+  #   name: Build and push to YandexCloud Registry
+  #   #needs: [ test-app-document ]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
 
-      - name: Build docker image
-        run: |
-          docker build ./app_document -f ./app_document/Dockerfile --tag cr.yandex/${{ secrets.YC_REGISTRY_ID }}/efiiiimov/delivery_service/app_document:latest
+  #     - name: Build docker image
+  #       run: |
+  #         docker build ./app_document -f ./app_document/Dockerfile --tag cr.yandex/${{ secrets.YC_REGISTRY_ID }}/efiiiimov/delivery_service/app_document:latest
 
-      - name: Login to YC Registry
-        uses: docker/login-action@v3.0.0
-        with:
-          registry: cr.yandex
-          username: json_key
-          password: ${{ secrets.YC_KEYS }}
+  #     - name: Login to YC Registry
+  #       uses: docker/login-action@v3.0.0
+  #       with:
+  #         registry: cr.yandex
+  #         username: json_key
+  #         password: ${{ secrets.YC_KEYS }}
 
-      - name: Push tag YC Registry
-        run: |
-          docker push cr.yandex/${{ secrets.YC_REGISTRY_ID }}/efiiiimov/delivery_service/app_document:latest
+  #     - name: Push tag YC Registry
+  #       run: |
+  #         docker push cr.yandex/${{ secrets.YC_REGISTRY_ID }}/efiiiimov/delivery_service/app_document:latest
 
-  deploy:
-    name: Deploy
-    runs-on: ubuntu-latest
-    needs: [ build-and-push-to-yc ]
-    steps:
-      - name: Deploy serverless container
-        uses: yc-actions/yc-sls-container-deploy@v1
-        with:
-          yc-sa-json-credentials: ${{ secrets.YC_KEYS }}
-          container-name: ${{ secrets.YC_CONTAINER_NAME }}
-          folder-id: ${{ secrets.YC_FOLDER_ID }}
-          revision-image-url: cr.yandex/${{ secrets.YC_REGISTRY_ID }}/efiiiimov/delivery_service/app_document:latest
-          revision-service-account-id: ${{ secrets.YC_SA_ID }}
-          revision-env: |
-            POSTGRES_URL_ORD=postgresql://secUREusER:StrongEnoughPassword)@51.250.26.59:5432/efimov_microservice_db_order
-            POSTGRES_URL_DOC=postgresql://secUREusER:StrongEnoughPassword)@51.250.26.59:5432/efimov_microservice_db_document
-            AMQP_URL=amqp://guest:guest123@51.250.26.59:5672/
+  # deploy:
+  #   name: Deploy
+  #   runs-on: ubuntu-latest
+  #   needs: [ build-and-push-to-yc ]
+  #   steps:
+  #     - name: Deploy serverless container
+  #       uses: yc-actions/yc-sls-container-deploy@v1
+  #       with:
+  #         yc-sa-json-credentials: ${{ secrets.YC_KEYS }}
+  #         container-name: ${{ secrets.YC_CONTAINER_NAME }}
+  #         folder-id: ${{ secrets.YC_FOLDER_ID }}
+  #         revision-image-url: cr.yandex/${{ secrets.YC_REGISTRY_ID }}/efiiiimov/delivery_service/app_document:latest
+  #         revision-service-account-id: ${{ secrets.YC_SA_ID }}
+  #         revision-env: |
+  #           POSTGRES_URL_ORD=postgresql://secUREusER:StrongEnoughPassword)@51.250.26.59:5432/efimov_microservice_db_order
+  #           POSTGRES_URL_DOC=postgresql://secUREusER:StrongEnoughPassword)@51.250.26.59:5432/efimov_microservice_db_document
+  #           AMQP_URL=amqp://guest:guest123@51.250.26.59:5672/

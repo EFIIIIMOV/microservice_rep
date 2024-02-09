@@ -23,7 +23,7 @@
 #
 #CMD ["/bin/sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8080"]
 
-FROM python:3.10
+FROM python:3.9
 
 WORKDIR /microservice/app_document
 
@@ -31,7 +31,7 @@ WORKDIR /microservice/app_document
 COPY ./requirements.txt /microservice/app_document/
 RUN pip install --no-cache-dir --upgrade -r /microservice/app_document/requirements.txt
 
-# Перенос проекта в образ
+# Перенос проекта в образx
 COPY ./app /microservice/app_document/app
 COPY .env /microservice/app_document
 
@@ -44,5 +44,6 @@ EXPOSE  8080
 # Добавляем путь к корневому каталогу проекта в PYTHONPATH
 ENV PYTHONPATH="${PYTHONPATH}:/microservice/app_document"
 ENV PYTHONPATH="${PYTHONPATH}:/microservice/app_document/app"
+ENV PYTHONPATH "${PYTHONPATH}:$(pwd)"
 
 CMD ["/bin/sh", "-c", "alembic upgrade head && uvicorn app.main:app --host  0.0.0.0 --port  8080"]

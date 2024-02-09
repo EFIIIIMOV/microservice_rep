@@ -6,6 +6,13 @@ from sqlalchemy_utils import database_exists, create_database
 
 from alembic import context
 
+import sys
+import os
+
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+APP_DIR = os.path.join(BASE_DIR, '../app')
+sys.path.append(APP_DIR)
+
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config

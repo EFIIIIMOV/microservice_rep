@@ -49,19 +49,19 @@ def test_create_second_document(
     assert document.doc == doc
 
 
-# def test_get_document_full(
-#         first_document_data: tuple[UUID, str, str, str],
-#         second_document_data: tuple[UUID, str, str, str],
-#         document_service: DocumentService
-# ) -> None:
-#     documents = document_service.get_document()
-#     assert len(documents) == 2
-#     assert documents[0].ord_id == first_document_data[0]
-#     assert documents[0].type == first_document_data[1]
-#     assert documents[0].doc == first_document_data[2]
-#     assert documents[0].customer_info == first_document_data[3]
+def test_get_document_full(
+        first_document_data: tuple[UUID, str, str, str],
+        second_document_data: tuple[UUID, str, str, str],
+        document_service: DocumentService
+) -> None:
+    documents = document_service.get_document()
+    assert len(documents) == 2
+    assert documents[0].ord_id == first_document_data[0]
+    assert documents[0].type == first_document_data[1]
+    assert documents[0].doc == first_document_data[2]
+    assert documents[0].customer_info == first_document_data[3]
 
-#     assert documents[1].ord_id == second_document_data[0]
-#     assert documents[1].type == second_document_data[1]
-#     assert documents[1].doc == second_document_data[2]
-#     assert documents[1].customer_info == second_document_data[3]
+    assert documents[1].ord_id == second_document_data[0]
+    assert documents[1].type == second_document_data[1]
+    assert documents[1].doc == second_document_data[2]
+    assert documents[1].customer_info == second_document_data[3]

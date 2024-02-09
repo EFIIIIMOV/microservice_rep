@@ -1,5 +1,6 @@
 from sqlalchemy import Column, String, DateTime, Enum
 from sqlalchemy.dialects.postgresql import UUID
+
 from app_order.app.models.order import OrderStatus
 from app_order.app.schemas.base_schema import Base
 

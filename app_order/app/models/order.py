@@ -1,8 +1,9 @@
 import enum
-from uuid import UUID
 from datetime import datetime
-from pydantic import ConfigDict, BaseModel
 from typing import Optional
+from uuid import UUID
+
+from pydantic import ConfigDict, BaseModel
 
 
 class OrderStatus(enum.Enum):

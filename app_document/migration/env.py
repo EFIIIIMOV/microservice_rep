@@ -1,13 +1,11 @@
+import os
+import sys
 from logging.config import fileConfig
 
+from alembic import context
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 from sqlalchemy_utils import database_exists, create_database
-
-from alembic import context
-
-import sys
-import os
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 APP_DIR = os.path.join(BASE_DIR, '../app')

@@ -1,9 +1,11 @@
 # uvicorn app.main:app --reload
 
 import asyncio
-from fastapi import FastAPI
+
 from app import rabbitmq
 from app.endpoints.order_router import order_router
+from fastapi import FastAPI
+
 #from app.endpoints.document_router import document_router
 #from app.endpoints.document_router import document_router
 

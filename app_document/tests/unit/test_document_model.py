@@ -1,8 +1,9 @@
 # /tests/unit/test_printing_model.py
 
-import pytest
-from uuid import uuid4, UUID
 from datetime import datetime
+from uuid import uuid4, UUID
+
+import pytest
 from pydantic import ValidationError
 
 from app_document.app.models.document import Document

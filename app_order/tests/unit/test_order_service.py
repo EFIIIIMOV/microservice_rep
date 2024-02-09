@@ -1,10 +1,10 @@
-import pytest
-from uuid import uuid4, UUID
-from datetime import datetime
+from uuid import uuid4
 
-from app_order.app.services.order_service import OrderService
+import pytest
+
 from app_order.app.models.order import OrderStatus
 from app_order.app.repositories.local_order_repo import OrderRepo
+from app_order.app.services.order_service import OrderService
 
 
 @pytest.fixture(scope='session')

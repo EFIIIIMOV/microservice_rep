@@ -1,14 +1,14 @@
-from datetime import datetime
-
-import aio_pika
 import json
-import traceback
 from asyncio import AbstractEventLoop
-from aio_pika.abc import AbstractRobustConnection
-from aio_pika import IncomingMessage
+from datetime import datetime
 from uuid import UUID
 
+import aio_pika
+from aio_pika.abc import AbstractRobustConnection
+
 from app_order.app.settings import settings
+
+
 #from app_document.app.services.document_service import DocumentService
 #from app_document.app.repositories.db_document_repo import DocumentRepo
 

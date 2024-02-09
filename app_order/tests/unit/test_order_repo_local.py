@@ -1,8 +1,9 @@
 # /tests/unit/test_printing_repo.py
 
-import pytest
-from uuid import uuid4, UUID
 from datetime import datetime
+from uuid import uuid4, UUID
+
+import pytest
 
 from app_order.app.models.order import Order, OrderStatus
 from app_order.app.repositories.local_order_repo import OrderRepo

@@ -1,8 +1,9 @@
 # /tests/unit/test_printing_model.py
 
-import pytest
-from uuid import uuid4
 from datetime import datetime
+from uuid import uuid4
+
+import pytest
 from pydantic import ValidationError
 
 from app_order.app.models.order import Order, OrderStatus

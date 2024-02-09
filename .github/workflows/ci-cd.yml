@@ -41,13 +41,13 @@ jobs:
 
       - name: Run unit tests
         run: |
-          cd /microservice_rep/app_document
+          cd /app_document
           python -m pytest ./tests/unit
           
 
       - name: Run integration tests
         run: |
-          cd /microservice_rep/app_document
+          cd /app_document
           python -m pytest ./tests/integration
 
 #  build-and-push-to-dh:

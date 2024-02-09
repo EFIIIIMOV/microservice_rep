@@ -7,7 +7,7 @@ from uuid import uuid4, UUID
 import pytest
 from pydantic import ValidationError
 
-from app_document.app.models.document import Document
+from app.models.document import Document
 
 doc_id: UUID
 ord_id: UUID

@@ -41,12 +41,14 @@ jobs:
 
       - name: Run unit tests
         run: |
-          pytest ./tests/unit
+          cd /microservice_rep/app_document
+          python -m pytest ./tests/unit
           
 
       - name: Run integration tests
         run: |
-          pytest ./tests/integration
+          cd /microservice_rep/app_document
+          python -m pytest ./tests/integration
 
 #  build-and-push-to-dh:
   #    name: Build and push to DockerHub

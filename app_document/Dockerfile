@@ -1,19 +1,19 @@
 FROM python:3.10
 
 # Выбор папки, в которой будет вестись работа
-WORKDIR /code
+WORKDIR /app_document
 
 # Установка зависимостей проекта
-COPY ./requirements.txt /code/
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+COPY ./requirements.txt /app_document/
+RUN pip install --no-cache-dir --upgrade -r /app_document/requirements.txt
 
 # Перенос проекта в образ
-COPY ./app /code/app
-COPY .env /code
+COPY ./app /app_document/app
+COPY .env /app_document
 
 # Копирование файлов alembic
-COPY ./migration /code/migration
-COPY ./alembic.ini /code/alembic.ini
+COPY ./migration /app_document/migration
+COPY ./alembic.ini /app_document/alembic.ini
 
 EXPOSE 8080
 

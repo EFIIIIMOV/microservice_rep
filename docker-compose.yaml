@@ -87,5 +87,5 @@ networks:
   app:
   # name: app
 volumes:
- postgres_data_order:
- postgres_data_document:
+  postgres_data_order:
+  postgres_data_document:

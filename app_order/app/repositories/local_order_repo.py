@@ -1,7 +1,7 @@
 from typing import Optional
 from uuid import UUID
 
-from app_order.app.models.order import Order
+from app.models.order import Order
 
 # orders: list[Order] = [
 #     Order(ord_id=UUID('85db966c-67f1-411e-95c0-f02edfa5464a'), status=OrderStatus.CREATE, address_info='test_address_info_0', customer_info='test_customer_info_0',

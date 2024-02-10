@@ -2,9 +2,9 @@ from uuid import uuid4
 
 import pytest
 
-from app_order.app.models.order import OrderStatus
-from app_order.app.repositories.local_order_repo import OrderRepo
-from app_order.app.services.order_service import OrderService
+from app.models.order import OrderStatus
+from app.repositories.local_order_repo import OrderRepo
+from app.services.order_service import OrderService
 
 
 @pytest.fixture(scope='session')

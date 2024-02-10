@@ -20,11 +20,13 @@ jobs:
 
       - name: Run unit tests
         run: |
-          python -m pytest ./app_order/tests/unit
+          python -m pytest ./tests/unit
+        working-directory: ./app_order
 
       - name: Run integration tests
         run: |
-          python -m pytest ./app_order/tests/integration
+          python -m pytest ./tests/integration
+        working-directory: ./app_order
 
   test-app-document:
     name: Run app_document tests

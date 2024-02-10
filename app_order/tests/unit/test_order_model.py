@@ -6,7 +6,7 @@ from uuid import uuid4
 import pytest
 from pydantic import ValidationError
 
-from app_order.app.models.order import Order, OrderStatus
+from app.models.order import Order, OrderStatus
 
 
 def test_order_creation():

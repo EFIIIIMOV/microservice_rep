@@ -6,8 +6,8 @@ from uuid import UUID, uuid4
 
 from fastapi import Depends
 
-from app_order.app.models.order import Order, OrderStatus
-from app_order.app.repositories.db_order_repo import OrderRepo
+from app.models.order import Order, OrderStatus
+from app.repositories.db_order_repo import OrderRepo
 
 
 class OrderService():

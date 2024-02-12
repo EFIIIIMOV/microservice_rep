@@ -45,4 +45,4 @@ EXPOSE  8080
 ENV PYTHONPATH="${PYTHONPATH}:/app_document"
 ENV PYTHONPATH="${PYTHONPATH}:/app_document/app"
 
-CMD ["/bin/sh", "-c", "alembic upgrade head && uvicorn app.main:app --host  0.0.0.0 --port  8080"]
+CMD ["/bin/sh", "-c", "alembic upgrade head && uvicorn app.main:app --host  0.0.0.0 --port  81"]

@@ -43,13 +43,13 @@ services:
 
   app_order:
     build:
-      context: .
-      dockerfile: ./app_order/Dockerfile
+      context: ./app_order
+      dockerfile: ./Dockerfile
     ports:
       - "80:80"
-    depends_on:
-      - postgres-order
-      - rabbitmq
+    # depends_on:
+    #   - postgres-order
+    #   - rabbitmq
     labels:
       logging: "promtail"
       logging_jobname: "containerlogs"
@@ -58,13 +58,13 @@ services:
 
   app_document:
     build:
-      context: .
-      dockerfile: ./app_document/Dockerfile
+      context: ./app_document
+      dockerfile: ./Dockerfile
     ports:
       - "81:81"
-    depends_on:
-      - postgres-document
-      - rabbitmq
+    # depends_on:
+    #   - postgres-document
+    #   - rabbitmq
     labels:
       logging: "promtail"
       logging_jobname: "containerlogs"
@@ -82,6 +82,24 @@ services:
   #     - "5050:80"
   #   networks:
   #     - app
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:23.0.1
+    volumes:
+      - ./realm-export.json:/opt/jboss/keycloak/imports/realm-export.json
+    ports:
+      - "8080:8080"
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    command:
+      - "start-dev"
+      - "-Dkeycloak.profile.feature.upload_scripts=enabled"
+      - "-Dkeycloak.migration.action=import"
+      - "-Dkeycloak.migration.provider=singleFile"
+      - "-Dkeycloak.migration.file=/opt/jboss/keycloak/imports/realm-export.json"
+    networks:
+      - app
 
 networks:
   app:
